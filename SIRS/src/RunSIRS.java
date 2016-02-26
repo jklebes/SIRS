@@ -20,13 +20,14 @@ public static void main(String[] args) throws IOException, InterruptedException{
 	Stats stats = new Stats();
 	SIRSFrame f;
 	
-	double InitialS= .9;
-	double InitialI= .4;
-	double p1=.5;
-	double p2=.1;
-	double p3=.1;
-	double infectiontime=20;
-	double recoverytime=400000;
+	double InitialS= .6;
+	double InitialI= .1;
+	double InitialM =0;
+	double p1=.2;
+	double p2=.3;
+	double p3=.7;
+	double infectiontime=0;
+	double recoverytime=0;
 
 	//file reading
 	FileReader fr = new FileReader(filename);
@@ -41,6 +42,10 @@ public static void main(String[] args) throws IOException, InterruptedException{
 		else if (name.equals("InitialI")){
 			InitialI = Double.valueOf(value);
 		}
+	
+	else if (name.equals("InitialM")){
+		InitialM = Double.valueOf(value);
+	}
 		else if (name.equals("p1")){
 			p1=Double.valueOf(value);
 		}
@@ -65,7 +70,7 @@ public static void main(String[] args) throws IOException, InterruptedException{
 	}
 
 	//initialize and run
-	Algorithm a = new Algorithm(width, height, InitialS, InitialI, infectiontime, recoverytime, p1, p2, p3);
+	Algorithm a = new Algorithm(width, height, InitialS, InitialI, InitialM, infectiontime, recoverytime, p1, p2, p3);
 	f = new SIRSFrame(a.grid);
 	f.setTitle("with initial susceptible " + InitialS + " and initial infected " + InitialI);
 	runSIRS(a, f, runsteps, repeats);

@@ -25,8 +25,9 @@ public class SIRSPanel extends JPanel{
 
 	private Color getColor(int i, int j, Grid l) {
 		if (l.getStatus(i,j)==0){return Color.white;}
-		else if (l.getStatus(i,j)==1){return Color.black;}
-		else if (l.getStatus(i,j)==2){return Color.red;}
+		else if (l.getStatus(i,j)==1){return Color.blue;}
+		else if (l.getStatus(i,j)==2){return Color.gray;}
+		else if (l.getStatus(i,j)==3){return Color.black;}
 		else{return Color.magenta;}
 	}  
 

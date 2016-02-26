@@ -13,15 +13,17 @@ public class Algorithm {
 	private Random random = new Random();
 	private double initS;
 	private double initI;
+	private double initM;
 	
-public Algorithm(int height, int width, double initS, double initI, double recovertime, double susceptibletime, double p1, double p2, double p3){
+public Algorithm(int height, int width, double initS, double initI, double initM, double recovertime, double susceptibletime, double p1, double p2, double p3){
 	this.initS=initS;
 	this.initI=initI;
+	this.initM=initM;
 	this.p1=p1;
 	this.p2=p2;
 	this.p3=p3;
-	this.grid = new Grid(width, height, initS, initI);
-	this.initialgrid = new Grid(width, height, initS, initI);
+	this.grid = new Grid(width, height, initS, initI, initM);
+	this.initialgrid = new Grid(width, height, initS, initI, initM);
 	this.durationOfInfection = recovertime;
 	this.durationOfRecovery= susceptibletime;
 }
@@ -61,7 +63,7 @@ public void singleUpdate(){
 
 public void reset(){
 	grid.resetAllTimes();
-	grid.fillRandom(initS, initI);
+	grid.fillRandom(initS, initI, initM);
 }
 
 //makes changes in this.grid referencing surrounding in given reference copy g

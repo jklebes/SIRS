@@ -10,12 +10,12 @@ public class Grid {
 		private int height;
 		private Random random = new Random();
 
-		public Grid(int width, int height, double initS, double initI){
+		public Grid(int width, int height, double initS, double initI, double initM){
 			this.width = width;
 			this.height=height;
 			this.setGrid(new int[height][width]);
 			this.timesgrid= new double[height][width];
-			fillRandom(initS, initI);
+			fillRandom(initS, initI, initM);
 			resetAllTimes();
 		}
 		
@@ -36,15 +36,17 @@ public class Grid {
 		}
 
 
-		void fillRandom(double SPercentage, double Ipercentage){
+		void fillRandom(double SPercentage, double Ipercentage, double MPercentage){
 			double r;
 			for (int i=0; i < height; i++){
 				for (int j=0; j < width; j++){
 					r=random.nextDouble();
-
-					if (r < SPercentage){
+					if (r<MPercentage){
+						SetStatus(i,j,3);
+					}
+					else if (r < (MPercentage+SPercentage)){
 						SetStatus(i,j,0);}
-					else if (r < (SPercentage+Ipercentage)){
+					else if (r < (MPercentage+SPercentage+Ipercentage)){
 						SetStatus(i,j,1);
 					}
 					else{SetStatus(i,j,2);
@@ -74,21 +76,21 @@ public class Grid {
 		}
 
 		private boolean checkValidStatus(int status){
-			if (status ==  0|| status == 1|| status==2){return true;}
+			if (status ==  0|| status == 1|| status==2 || status==3){return true;}
 			else {return false;}
 		}
 
 		void Infect(int i, int j) {
 			SetStatus(i,j,1);
-			System.out.println("changed value "+i+ " "+j );
+			//System.out.println("changed value "+i+ " "+j );
 		}
 		void Recover(int i, int j) {
 			SetStatus(i,j,2);
-			System.out.println("changed value "+i+ " "+j );
+			//System.out.println("changed value "+i+ " "+j );
 		}
 		void Susceptible(int i, int j) {
 			SetStatus(i,j,0);
-			System.out.println("changed value "+i+ " "+j );
+			//System.out.println("changed value "+i+ " "+j );
 		}
 
 		int InfectedNeighborCount(int i, int j) {
