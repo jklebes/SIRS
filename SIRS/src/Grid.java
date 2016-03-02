@@ -44,9 +44,9 @@ public class Grid {
 					if (r<MPercentage){
 						SetStatus(i,j,3);
 					}
-					else if (r < (MPercentage+SPercentage)){
+					else if (r < (MPercentage+(1-MPercentage)*SPercentage)){
 						SetStatus(i,j,0);}
-					else if (r < (MPercentage+SPercentage+Ipercentage)){
+					else if (r < (MPercentage+(1-MPercentage)*(SPercentage+Ipercentage))){
 						SetStatus(i,j,1);
 					}
 					else{SetStatus(i,j,2);

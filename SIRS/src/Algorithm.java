@@ -43,7 +43,7 @@ public void makeCopy(){
 
 //updates every scquare in one step, referencing state at beginning 
 //with pi=1: deterministic but does not depend on order
-public void updateGridSequential() throws InterruptedException{
+public void updateGridParallel() throws InterruptedException{
 	makeCopy();
 	for (int i = 0; i < grid.getheight(); i++){
 		for (int j = 0; j < grid.getwidth(); j++){
@@ -54,7 +54,19 @@ public void updateGridSequential() throws InterruptedException{
 	}
 }
 
-public void singleUpdate(){
+public void updateGridRandom(){
+	int randomi;
+	int randomj;
+	for (int i = 0; i < grid.getheight(); i++){
+		for (int j = 0; j < grid.getwidth(); j++){
+			randomi = random.nextInt(grid.getheight());
+			randomj = random.nextInt(grid.getwidth());
+			updateSquare(randomi,randomj,grid);
+		}
+	}
+}
+
+public void singleUpdateRandom(){
 			int randomi = random.nextInt(grid.getheight());
 			int randomj = random.nextInt(grid.getwidth());
 			updateSquare(randomi,randomj,grid);
@@ -92,7 +104,7 @@ public void updateSquare(int i,int j, Grid reference){
 			}
 		}
 	}
-
+	//System.out.println("updating square at "+i+" "+j);
 	grid.addTime(stepTimeValue);
 }
 
@@ -106,5 +118,36 @@ public void updateSquare(int i,int j, Grid reference){
 	 else{return false;}
 }
 
+public int getheight() {
+	return grid.getheight();
+}
+
+public int getwidth() {
+	return grid.getwidth();
+}
+
+public int getTotalI() {
+	int totalI=0;
+	for (int i = 0; i < grid.getheight(); i++){
+		for (int j = 0; j < grid.getwidth(); j++){
+			if (grid.getStatus(i,j) == 1){
+				totalI+=1;
+			}
+		}
+		}
+	return totalI;
+	}
+
+public void setp1(double p1) {
+	this.p1=p1;
+}
+
+public void setp3(double p3) {
+	this.p3=p3;
+}
+
+public void fillRandom(newM) {
+	this.grid.fillRandom(intS, initI, newM)	;
+}
 
 }
